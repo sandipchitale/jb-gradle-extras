@@ -23,6 +23,7 @@
         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <dependencies>
         <plugin id="com.intellij.modules.platform"/>
+        <plugin id="com.intellij.gradle"/>
     </dependencies>
 
     <change-notes><![CDATA[
@@ -57,7 +58,7 @@
                 icon="AllIcons.Nodes.Interface"
                 description="Runs 'gradle -q help --task taskName'.">
 
-            <add-to-group group-id="HelpMenu" anchor="after" relative-to-action="HelpTopics"/>
+            <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="last"/>
         </action>
     </actions>
 </idea-plugin>

@@ -18,12 +18,13 @@ repositories {
 dependencies {
     intellijPlatform {
         intellijIdea("253.27864.23")
-        bundledPlugin("com.intellij.gradle")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 
 
         // Add plugin dependencies for compilation here, example:
         // bundledPlugin("com.intellij.java")
+        bundledPlugin("com.intellij.gradle")
+        bundledPlugin("org.jetbrains.plugins.gradle")
     }
 }
 

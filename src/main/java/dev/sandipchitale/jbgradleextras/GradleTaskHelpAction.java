@@ -123,11 +123,11 @@ public class GradleTaskHelpAction extends AnAction {
     public void update(@NotNull AnActionEvent anActionEvent) {
         List<ExternalSystemNode> selectedNodes = getSelectedTaskData(anActionEvent);
         Presentation presentation = anActionEvent.getPresentation();
-        boolean taskNodeSelected = selectedNodes != null && selectedNodes.size() > 0 && (selectedNodes.get(0) instanceof TaskNode);
+        boolean taskNodeSelected = selectedNodes != null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode);
         if (taskNodeSelected) {
-            presentation.setText("Detailed task information for: " + ((TaskNode) selectedNodes.get(0)).getName());
+            presentation.setText("Detailed task information for: " + ((TaskNode) selectedNodes.getFirst()).getName());
         }
-        presentation.setEnabledAndVisible(taskNodeSelected);
+        presentation.setEnabled(taskNodeSelected);
     }
 
     /**
