@@ -2,7 +2,6 @@ package dev.sandipchitale.jbgradleextras;
 
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.ProcessOutputType;
-import com.intellij.notification.NotificationDisplayType;
 import com.intellij.notification.NotificationGroup;
 import com.intellij.notification.NotificationGroupManager;
 import com.intellij.notification.NotificationType;
@@ -31,6 +30,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class GradleTaskHelpAction extends AnAction {
 
@@ -58,7 +58,7 @@ public class GradleTaskHelpAction extends AnAction {
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
             JBScrollPane scrollPane = new JBScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(700, 550));
+            scrollPane.setPreferredSize(new Dimension(800, 600));
             return scrollPane;
         }
 
@@ -74,7 +74,7 @@ public class GradleTaskHelpAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         Project project = anActionEvent.getProject();
         List<ExternalSystemNode> selectedNodes= getSelectedTaskData(anActionEvent);
-        if (selectedNodes !=null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode taskNode)){
+        if (selectedNodes !=null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode taskNode) ){
             // Get the simple task name (e.g., "build")
             String taskName = taskNode.getName();
 
@@ -110,7 +110,7 @@ public class GradleTaskHelpAction extends AnAction {
             // 1. Configure the task execution
             ExternalSystemTaskExecutionSettings settings = new ExternalSystemTaskExecutionSettings();
             settings.setExternalSystemIdString(GRADLE.getId());
-            settings.setExternalProjectPath(project.getBasePath());
+            settings.setExternalProjectPath(Objects.requireNonNull(project).getBasePath());
             settings.setTaskNames(Collections.singletonList("help")); // The task to run is 'help'
             settings.setScriptParameters("--task " + taskName + " -q"); // The argument is '--task <name>'
 
