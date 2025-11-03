@@ -4,7 +4,7 @@ This plugin hopes to provide some additional, useful functionality related to Gr
 
 # Feature
 
--Adds action to show detailed help related to the selected Gradle task in Gradle toolwindow.
+- Adds action to show detailed help related to the selected Gradle task in Gradle toolwindow.
 
   - Action
 
