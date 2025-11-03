@@ -1,6 +1,6 @@
 # Gradle Extras
 
-This plugin hopes to provide some additional, useful functionality related to Gradle.
+This plugin provides useful functionality related to Gradle.
 
 # Feature
 
