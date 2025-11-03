@@ -99,9 +99,7 @@ public class GradleTaskHelpAction extends AnAction {
                         @Override
                         public void onEnd(@NotNull String projectPath, @NotNull ExternalSystemTaskId id) {
                             notificationManager.removeNotificationListener(this);
-                            ApplicationManager.getApplication().invokeLater(() -> {
-                                new OutputDialog(project, output.toString(), taskName).show();
-                            });
+                            ApplicationManager.getApplication().invokeLater(() -> new OutputDialog(project, output.toString(), taskName).show());
                         }
                     };
 
@@ -138,7 +136,7 @@ public class GradleTaskHelpAction extends AnAction {
         Presentation presentation = anActionEvent.getPresentation();
         boolean taskNodeSelected = selectedNodes != null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode);
         if (taskNodeSelected) {
-            presentation.setText("Detailed task information for: " + ((TaskNode) selectedNodes.getFirst()).getName());
+            presentation.setText("Detailed task information for: " + selectedNodes.getFirst().getName());
         }
         presentation.setEnabled(taskNodeSelected);
     }
