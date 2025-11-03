@@ -2,6 +2,10 @@ package dev.sandipchitale.jbgradleextras;
 
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.ProcessOutputType;
+import com.intellij.notification.NotificationDisplayType;
+import com.intellij.notification.NotificationGroup;
+import com.intellij.notification.NotificationGroupManager;
+import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -31,6 +35,9 @@ import java.util.List;
 public class GradleTaskHelpAction extends AnAction {
 
     public static final ProjectSystemId GRADLE = new ProjectSystemId("GRADLE");
+
+    public static final NotificationGroup NOTIFICATIONS_GROUP = NotificationGroupManager.getInstance()
+            .getNotificationGroup("dev.sandipchitale.jbgradleextras.notifications");
 
     static class OutputDialog extends DialogWrapper {
         private final String output;
@@ -67,9 +74,15 @@ public class GradleTaskHelpAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         Project project = anActionEvent.getProject();
         List<ExternalSystemNode> selectedNodes= getSelectedTaskData(anActionEvent);
-        if (selectedNodes !=null && selectedNodes.size() > 0 && (selectedNodes.get(0) instanceof TaskNode taskNode)){
+        if (selectedNodes !=null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode taskNode)){
             // Get the simple task name (e.g., "build")
             String taskName = taskNode.getName();
+
+            NOTIFICATIONS_GROUP.createNotification(
+                    "Task: " + taskName,
+                    "Getting detailed information about task: " + taskName,
+                    NotificationType.INFORMATION)
+                    .notify(project);
 
             ExternalSystemProgressNotificationManager notificationManager =
                     ExternalSystemProgressNotificationManager.getInstance();

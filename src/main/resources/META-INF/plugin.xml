@@ -49,6 +49,8 @@
     <!-- Extensions defined by the plugin.
         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="dev.sandipchitale.jbgradleextras.notifications"
+                            displayType="BALLOON"/>
     </extensions>
 
     <actions>
@@ -57,8 +59,7 @@
                 text="Show Help for Gradle Task"
                 icon="AllIcons.Nodes.Interface"
                 description="Runs 'gradle -q help --task taskName'.">
-
-            <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="last"/>
+            <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
