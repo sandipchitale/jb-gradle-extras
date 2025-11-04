@@ -2,9 +2,6 @@ package dev.sandipchitale.jbgradleextras;
 
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.ProcessOutputType;
-import com.intellij.notification.NotificationGroup;
-import com.intellij.notification.NotificationGroupManager;
-import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -33,10 +30,8 @@ import java.util.Objects;
 
 import static dev.sandipchitale.jbgradleextras.Constants.GRADLE;
 
-
 public class GradleTaskHelpAction extends AnAction {
-    public static final NotificationGroup NOTIFICATIONS_GROUP = NotificationGroupManager.getInstance()
-            .getNotificationGroup("dev.sandipchitale.jbgradleextras.notifications");
+
 
     static class OutputDialog extends DialogWrapper {
         private final String output;
@@ -72,16 +67,14 @@ public class GradleTaskHelpAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         Project project = anActionEvent.getProject();
-        List<ExternalSystemNode> selectedNodes= getSelectedTaskData(anActionEvent);
-        if (selectedNodes !=null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode taskNode) ){
+        List<ExternalSystemNode> selectedNodes = getSelectedTaskData(anActionEvent);
+        if (selectedNodes != null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode taskNode)) {
             // Get the simple task name (e.g., "build")
             String taskName = taskNode.getName();
 
-            NOTIFICATIONS_GROUP.createNotification(
+            Utils.showNotification(project,
                     "Task: " + taskName,
-                    "Getting detailed information about task: " + taskName,
-                    NotificationType.INFORMATION)
-                    .notify(project);
+                    "Getting detailed information about task: " + taskName);
 
             ExternalSystemProgressNotificationManager notificationManager =
                     ExternalSystemProgressNotificationManager.getInstance();
@@ -108,13 +101,13 @@ public class GradleTaskHelpAction extends AnAction {
             ExternalSystemTaskExecutionSettings settings = new ExternalSystemTaskExecutionSettings();
             settings.setExternalSystemIdString(GRADLE.getId());
             settings.setExternalProjectPath(Objects.requireNonNull(project).getBasePath());
-            settings.setTaskNames(Collections.singletonList("help")); // The task to run is 'help'
-            settings.setScriptParameters("--task " + taskName + " -q"); // The argument is '--task <name>'
+            settings.setTaskNames(Collections.singletonList("help"));
+            settings.setScriptParameters("-q --task " + taskName);
 
             // 2. Run the task
             ExternalSystemUtil.runTask(
                     settings,
-                    DefaultRunExecutor.EXECUTOR_ID, // Use the standard "Run" executor
+                    DefaultRunExecutor.EXECUTOR_ID,
                     project,
                     GRADLE,
                     null,
