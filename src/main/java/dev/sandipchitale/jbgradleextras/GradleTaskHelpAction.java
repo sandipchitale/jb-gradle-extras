@@ -11,7 +11,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.externalSystem.model.ExternalSystemDataKeys;
-import com.intellij.openapi.externalSystem.model.ProjectSystemId;
 import com.intellij.openapi.externalSystem.model.execution.ExternalSystemTaskExecutionSettings;
 import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskId;
 import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskNotificationListener;
@@ -32,10 +31,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static dev.sandipchitale.jbgradleextras.Constants.GRADLE;
+
+
 public class GradleTaskHelpAction extends AnAction {
-
-    public static final ProjectSystemId GRADLE = new ProjectSystemId("GRADLE");
-
     public static final NotificationGroup NOTIFICATIONS_GROUP = NotificationGroupManager.getInstance()
             .getNotificationGroup("dev.sandipchitale.jbgradleextras.notifications");
 

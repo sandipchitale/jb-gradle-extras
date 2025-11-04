@@ -29,11 +29,13 @@
     <change-notes><![CDATA[
         <h2>New Features</h2>
         <ul>
-            <li>Adds action to show detailed help related to the selected Gradle task in Gradle toolwindow.</li>
+            <li>Adds action to show  help related to the selected Gradle task in Gradle toolwindow.</li>
+            <li>Adds action to run --refresh-dependencies.</li>
         </ul>
         <h2>Features</h2>
         <ul>
             <li>Adds action to show detailed help related to the selected Gradle task in Gradle toolwindow.</li>
+            <li>Adds action to run --refresh-dependencies.</li>
         </ul>
         <h2>Known Bugs</h2>
         <ul>
@@ -60,6 +62,13 @@
                 icon="AllIcons.Nodes.Interface"
                 description="Runs 'gradle -q help --task taskName'.">
             <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="first"/>
+        </action>
+        <action id="dev.sandipchitale.jbgradleextras.RefreshDependenciesAction"
+                class="dev.sandipchitale.jbgradleextras.RefreshDependenciesAction"
+                text="Refresh Dependencies"
+                icon="AllIcons.Actions.ForceRefresh"
+                description="Runs 'gradle --refresh-dependencies -x help'.">
+            <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="after" relative-to-action="dev.sandipchitale.jbgradleextras.GradleTaskHelpAction"/>
         </action>
     </actions>
 </idea-plugin>
