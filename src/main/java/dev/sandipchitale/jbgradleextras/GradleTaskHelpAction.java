@@ -128,7 +128,9 @@ public class GradleTaskHelpAction extends AnAction {
         Presentation presentation = anActionEvent.getPresentation();
         boolean taskNodeSelected = selectedNodes != null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode);
         if (taskNodeSelected) {
-            presentation.setText("Detailed task information for: " + selectedNodes.getFirst().getName());
+            presentation.setText("Detailed Task Information for: " + selectedNodes.getFirst().getName());
+        } else {
+            presentation.setText("Show Detailed Task Information");
         }
         presentation.setEnabled(taskNodeSelected);
     }

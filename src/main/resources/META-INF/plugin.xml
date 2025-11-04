@@ -58,7 +58,7 @@
     <actions>
         <action id="dev.sandipchitale.jbgradleextras.GradleTaskHelpAction"
                 class="dev.sandipchitale.jbgradleextras.GradleTaskHelpAction"
-                text="Show Help for Gradle Task"
+                text="Show Detailed Task Information"
                 icon="AllIcons.Nodes.Interface"
                 description="Runs 'gradle -q help --task taskName'.">
             <add-to-group group-id="Gradle.View.ActionsToolbar.OtherActionsPanel" anchor="first"/>
