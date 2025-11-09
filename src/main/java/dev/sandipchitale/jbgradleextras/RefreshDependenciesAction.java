@@ -10,6 +10,7 @@ import com.intellij.openapi.externalSystem.service.execution.ProgressExecutionMo
 import com.intellij.openapi.externalSystem.util.ExternalSystemUtil;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.gradle.settings.GradleSettings;
 
 import java.util.Objects;
 
@@ -51,6 +52,7 @@ public class RefreshDependenciesAction extends AnAction {
     @Override
     public void update(@NotNull AnActionEvent anActionEvent) {
         Presentation presentation = anActionEvent.getPresentation();
-        presentation.setEnabledAndVisible(true);
+        Project project = anActionEvent.getProject();
+        presentation.setEnabledAndVisible(!GradleSettings.getInstance(Objects.requireNonNull(project)).getLinkedProjectsSettings().isEmpty());
     }
 }

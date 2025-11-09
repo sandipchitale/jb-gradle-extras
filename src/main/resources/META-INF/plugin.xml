@@ -17,6 +17,7 @@
         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
     <description><![CDATA[
         Adds action to show detailed help related to the selected Gradle task in Gradle toolwindow.
+        Adds action to run --refresh-dependencies.
     ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -29,7 +30,7 @@
     <change-notes><![CDATA[
         <h2>New Features</h2>
         <ul>
-            <li>Adds action to show  help related to the selected Gradle task in Gradle toolwindow.</li>
+            <li>Adds action to show help related to the selected Gradle task in Gradle toolwindow.</li>
             <li>Adds action to run --refresh-dependencies.</li>
         </ul>
         <h2>Features</h2>

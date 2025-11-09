@@ -21,6 +21,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBScrollPane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.gradle.settings.GradleSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,8 +125,13 @@ public class GradleTaskHelpAction extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent anActionEvent) {
-        List<ExternalSystemNode> selectedNodes = getSelectedTaskData(anActionEvent);
         Presentation presentation = anActionEvent.getPresentation();
+        Project project = anActionEvent.getProject();
+        if (GradleSettings.getInstance(Objects.requireNonNull(project)).getLinkedProjectsSettings().isEmpty()) {
+            presentation.setEnabled(false);
+            return;
+        }
+        List<ExternalSystemNode> selectedNodes = getSelectedTaskData(anActionEvent);
         boolean taskNodeSelected = selectedNodes != null && !selectedNodes.isEmpty() && (selectedNodes.getFirst() instanceof TaskNode);
         if (taskNodeSelected) {
             presentation.setText("Detailed Task Information for: " + selectedNodes.getFirst().getName());
